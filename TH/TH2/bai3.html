@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animating Images</title>
+<style>
+    .container {
+        border: 1px solid red;
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        height: 300px; /* Chiều cao màn hình */
+    }
+    .layer {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+    }
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: transform 1s linear;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="layer" id="layer1">
+        <img src="../../../web-n/image/download.jpg" alt="Image 1">
+    </div>
+</div>
+
+<div class="container">
+    <div class="layer" id="layer2">
+        <img src="../../../web-n/image/download1.jpg" alt="Image 2">
+    </div>
+</div>
+
+<script>
+    // Di chuyển ảnh từ trái sang phải
+    function moveRight() {
+        const layer1 = document.getElementById('layer1');
+        const image1 = layer1.querySelector('img');
+        image1.style.transform = 'translateX(550%)'; // Di chuyển ảnh đến vị trí phải cùng
+        setTimeout(() => {
+            image1.style.transform = 'translateX(0)'; // Đặt lại vị trí ảnh về bên trái
+            layer1.appendChild(image1); // Di chuyển ảnh về sau để tiếp tục vòng lặp
+        }, 2000); // Thời gian di chuyển
+    }
+
+    // Di chuyển ảnh từ trên xuống dưới
+    function moveDown() {
+        const layer2 = document.getElementById('layer2');
+        const image2 = layer2.querySelector('img');
+        image2.style.transform = 'translateY(550%)'; // Di chuyển ảnh đến vị trí dưới cùng
+        setTimeout(() => {
+            image2.style.transform = 'translateY(0)'; // Đặt lại vị trí ảnh về trên
+            layer2.appendChild(image2); // Di chuyển ảnh về sau để tiếp tục vòng lặp
+        }, 2000); // Thời gian di chuyển
+    }
+
+    // Gọi hàm di chuyển từ trái sang phải mỗi giây
+    setInterval(moveRight, 3000);
+
+    // Gọi hàm di chuyển từ trên xuống dưới mỗi giây
+    setInterval(moveDown, 3000);
+</script>
+
+</body>
+</html>

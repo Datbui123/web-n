@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Di chuyển ảnh theo hướng chéo</title>
+</head>
+
+<body>
+    <img id="myImage" src="../../web-n/image/download.jpg" style="position: absolute; top: 0; right: 0; transition: all 1s ease;">
+    <button id="moveButton">Di chuyển</button>
+    <script type="text/javascript">
+        // Lấy thẻ img bằng id
+        var img = document.getElementById('myImage');
+        const moveButton = document.getElementById('moveButton');
+
+        // Tạo biến để lưu vị trí hiện tại của ảnh
+        var posX = 0;
+        var posY = 0;
+
+        // Tạo hàm để di chuyển ảnh theo hướng chéo
+        function moveImage() {
+            posX += 1100; // Di chuyển 5 pixel theo trục X
+            posY += 420; // Di chuyển 5 pixel theo trục Y
+            moveButton.addEventListener('click', () => {
+                // Cập nhật vị trí mới của ảnh
+                img.style.right = posX + 'px';
+                img.style.top = posY + 'px';
+
+                // Gọi hàm moveImage mỗi 50ms để tạo hiệu ứng di chuyển liên tục
+                setTimeout(moveImage, 50);
+            }
+            )
+        }
+
+        // Gọi hàm moveImage để bắt đầu di chuyển ảnh
+        moveImage();
+    </script>
+</body>
+
+</html>

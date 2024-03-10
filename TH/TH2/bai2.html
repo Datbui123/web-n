@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="digital-clock" style="color: blue;"></h1>
+    <script type="text/javascript">
+        function Time(){
+            var date = new Date();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var period = "";
+            if (hour >= 12){
+                period = "PM";
+            } else {
+                period = "AM";
+            }
+            if (hour == 0){
+                hour = 12;
+            } else {
+                if (hour > 12){
+                    hour = hour - 12;
+                }
+            }
+            hour = update(hour);
+            minute = update(minute);
+            second = update(second);
+            document.getElementById("digital-clock").innerText = hour + " : " + minute + " : " + second + " " + period;
+            setTimeout(Time, 1000);
+        }
+        function update(t){
+            if (t<10){
+                return "0" + t;
+            } else {
+                return t;
+            }
+        }
+        Time();
+    </script>
+</body>
+</html>

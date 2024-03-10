@@ -1,0 +1,16 @@
+.box{
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+hr{
+    position: fixed;
+    left: 60px;
+    width: 210px;
+}
+table{
+    /* border: 1px solid; */
+}
+td{
+    /* border: 1px solid; */
+}

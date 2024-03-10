@@ -1,0 +1,31 @@
+.box{
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+.title{
+    /* padding-top: 50px; */
+    /* position: relative; */
+    border: 1px solid red;
+    background-color:yellow;
+    text-align: center;
+    /* height: 30px; */
+    /* font-variant: small-caps; */
+    font-weight: bolder;
+    font-size: 20px;
+    color: green;
+}
+.author{
+    text-align: center;
+    font-weight: bolder;
+}
+.article1{
+    text-align: center;
+    color: blue;
+}
+.article2{
+    text-align: left;
+    color: red;
+}.article3{
+    text-align: right;
+}

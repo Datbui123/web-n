@@ -1,0 +1,36 @@
+.nav1{
+    top: 0px;
+    left: 0px;
+    text-align: center;
+    position: absolute;
+    width: 170px;
+    height: 1000px;
+    margin: 0px;
+    padding: 0px;
+    /* border: 1px solid red; */
+    /* border-radius: 5px; */
+    /* box-shadow: 0 0 5px orangered; */
+    list-style: none;
+    height: 40px;
+    /* background-color: blue; */
+}
+ul.nav1>li>a
+{
+    background-color: blue;
+    width: 150px;
+    display: block;
+    line-height: 40px;
+    text-decoration: none;
+    /* font-variant: small-caps; */
+    /* padding-left: 25px; */
+    color: white;
+}
+ul.nav1>li>a:hover{
+    background-color: red;
+    color: white;
+    /* font-weight: bolder; */
+}
+ul.nav1>li{
+    /* float: left; */
+    margin: 0 5px;
+}
