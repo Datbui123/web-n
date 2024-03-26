@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #myForm {
+            position: relative;
+            border: 1px solid;
+            width: 400px;
+            height: 590px;
+            border: 1px solid blue;
+            border-radius: 5px;
+        }
+
+        .box {
+            width: 380px;
+            background-color: blue;
+            position: absolute;
+            padding-left: 20px;
+        }
+
+        input {
+            width: 350px;
+        }
+
+        .box1 {
+            width: 350px;
+            height: 500px;
+            position: absolute;
+            top: 50px;
+            left: 20px;
+        }
+
+        .box2 {
+            width: 800px;
+            position: fixed;
+            top: 10px;
+            left: 450px;
+        }
+
+        .box3 {
+            width: 750px;
+            color: white;
+            position: absolute;
+            border-radius: 5px;
+            background-color: blue;
+            padding-left: 20px;
+        }
+
+        table {
+            text-align: center;
+            width: 750px;
+            position: absolute;
+            top: 120px;
+            border-collapse: collapse;
+        }
+
+        tr {
+            height: 60px;
+        }
+
+        tr.clicked {
+            background-color: rgb(216, 228, 47);
+        }
+
+        label {
+            color: red;
+        }
+
+        p {
+            margin: 7px;
+        }
+
+        .search {
+            border: none;
+            border-radius: 5px;
+            width: 760px;
+            height: 30px;
+            position: absolute;
+            box-shadow: 1px 1px 10px 3px rgb(134, 134, 218);
+            top: 60px;
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="myForm">
+        <div class="box">
+            <p style="color: white;">NHẬP THÔNG TIN XE CỘ</p>
+        </div>
+        <div class="box1">
+            <p>Tên xe<label>&#42;</label>:</p>
+            <input type="text" id="name" name="name">
+            <p>Hình ảnh:</p>
+            <input type="text" name="" id="image" name="image">
+            <p>Hãng xe<label>&#42;</label>:</p>
+            <select name="" id="brand" name="brand" style="width: 350px;">
+                <option value="">-- Hãng xe --</option>
+                <option value="">Honda</option>
+                <option value="">Yamaha</option>
+            </select>
+            <p>Giá tiền<label>&#42;</label>:</p>
+            <input type="number" name="" id="money" name="money">
+            <p>Mô tả:</p>
+            <textarea style="width: 350px;" name="" id="detail" name="detail" cols="30" rows="5"></textarea>
+            <p>Người liên hệ<label>&#42;</label>:</p>
+            <input type="text" id="ps1" name="ps1">
+            <p>Số điện thoại người liên hệ<label>&#42;</label>:</p>
+            <input type="text" id="ps2" name="ps2">
+            <p>Email<label>&#42;</label>:</p>
+            <input type="email" name="" id="email" name="email">
+            <br><br>
+            <div class="btn">
+                <button onclick="saveCar()">Lưu</button>
+                <button type="reset">Xóa</button>
+            </div>
+        </div>
+    </form>
+    <div class="box2">
+        <div class="box3">
+            <p>QUẢN LÝ DANH SÁCH XE CỘ</p>
+        </div>
+        <input class="search" type="text" placeholder="Tìm kiếm .." />
+        <table border="1" id="carTable">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Hình ảnh</th>
+                    <th>Tên xe</th>
+                    <th>Hãng xe</th>
+                    <th>Giá tiền</th>
+                    <th>Người liên hệ</th>
+                    <th>Điện thoại</th>
+                    <th>Email</th>
+                </tr>    
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8@123</td>
+                </tr>    
+            </tbody>
+        </table>
+    </div>
+
+    
+    <script>
+        var selectedRow = null;
+
+        // Hàm chọn hàng khi click vào
+        function selectRow(row) {
+            if (selectedRow !== null) {
+                selectedRow.classList.remove('clicked');
+            }
+            selectedRow = row;
+            selectedRow.classList.add('clicked');
+
+            // Lấy các ô dữ liệu của hàng được chọn
+            var cells = row.getElementsByTagName("td");
+            var myForm = document.getElementById("myForm");
+
+            // Gán giá trị từ hàng vào form
+            myForm.elements["name"].value = cells[2].textContent;
+            myForm.elements["image"].value = cells[1].textContent;
+            myForm.elements["brand"].value = cells[3].textContent;
+            myForm.elements["money"].value = cells[4].textContent;
+            //myForm.elements["detail"].value = cells[1].textContent;
+            myForm.elements["ps1"].value = cells[5].textContent;
+            myForm.elements["ps2"].value = cells[6].textContent;
+            myForm.elements["email"].value = cells[7].textContent;
+        }
+
+        function validateEmail(email) {
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(email);
+        }
+
+        function saveCar() {
+            event.preventDefault();
+
+            var lastRow = document.querySelector("#carTable tbody tr:last-child");
+            var cells = lastRow.getElementsByTagName("td");
+            var stt = cells[0].textContent;
+
+            var name = document.getElementById('name').value;
+            var image = document.getElementById('image').value;
+            var brand = document.getElementById('brand').value;
+            var money = document.getElementById('money').value;
+            var detail = document.getElementById('detail').value;
+            var ps1 = document.getElementById('ps1').value;
+            var ps2 = document.getElementById('ps2').value;
+            var email = document.getElementById('email').value;
+
+            // Kiểm tra xem các trường có được điền đầy đủ không
+            if (name && money && ps1 && ps2 && email) {
+                // Kiểm tra tính hợp lệ của email
+                if (validateEmail(email)) {
+
+                    // Tạo một hàng mới trong bảng và thêm thông tin của xe vào hàng đó
+                    var table = document.getElementById('carTable');
+                    var newRow = table.insertRow(-1);
+
+                    var cell0 = newRow.insertCell(0);
+                    var cell1 = newRow.insertCell(1);
+                    var cell2 = newRow.insertCell(2);
+                    var cell3 = newRow.insertCell(3);
+                    var cell4 = newRow.insertCell(4);
+                    var cell5 = newRow.insertCell(5);
+                    var cell6 = newRow.insertCell(6);
+                    var cell7 = newRow.insertCell(7);
+
+                    cell0.textContent = stt++;
+                    cell1.textContent = image;
+                    cell2.textContent = name;
+                    cell3.textContent = brand;
+                    cell4.textContent = money;
+                    cell5.textContent = ps1;
+                    cell6.textContent = ps2;
+                    cell7.textContent = email;
+
+                    // Xóa dữ liệu trong các trường ở cột bên trái sau khi lưu thành công
+                    //document.getElementById('brand').value = '';
+                    //document.getElementById('model').value = '';
+                    //document.getElementById('color').value = '';
+                }
+                else {
+                    alert("Vui lòng nhập một địa chỉ email hợp lệ.");
+                }
+
+            } else {
+                alert("Vui lòng điền đầy đủ thông tin xe.");
+            }
+        }
+        // Gán sự kiện click vào mỗi hàng
+        var rows = document.querySelectorAll("#carTable tr");
+        rows.forEach(function (row) {
+            row.addEventListener("click", function () {
+                selectRow(row);
+            });
+        });
+    </script>
+</body>
+
+</html>

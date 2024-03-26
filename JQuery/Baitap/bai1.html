@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lí danh sách xe cộ</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .car-details {
+            display: none;
+        }
+
+        .car-details.active {
+            display: block;
+        }
+        .search {
+            border: none;
+            border-radius: 5px;
+            width: 500px;
+            height: 30px;
+            box-shadow: 1px 1px 10px 3px rgb(134, 134, 218);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Nhập thông tin xe cộ</h2>
+                <form id="carForm">
+                    <input type="hidden" id="carIndex">
+                    <div class="form-group">
+                        <label for="carName">Tên xe:</label>
+                        <input type="text" class="form-control" id="carName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="carImage">Hình ảnh:</label>
+                        <input type="text" class="form-control" id="carImage" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="carBrand">Hãng xe:</label>
+                        <select class="form-control" id="carBrand" required>
+                            <option value="" selected disabled>Chọn hãng xe</option>
+                            <option value="Honda">Honda</option>
+                            <option value="Toyota">Toyota</option>
+                            <option value="Ford">Ford</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="carPrice">Giá tiền:</label>
+                        <input type="number" class="form-control" id="carPrice" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="carDescription">Mô tả:</label>
+                        <textarea class="form-control" id="carDescription" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactPerson">Người liên hệ:</label>
+                        <input type="text" class="form-control" id="contactPerson" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactPhone">Số điện thoại:</label>
+                        <input type="tel" class="form-control" id="contactPhone" pattern="[0-9]{10}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail">Email:</label>
+                        <input type="email" class="form-control" id="contactEmail" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sửa xe</button>
+                    <button type="button" class="btn btn-danger" id="deleteCar">Xóa xe</button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <h2>Quản lí danh sách xe cộ</h2>
+                <input class="search" type="text" placeholder="Tìm kiếm .." />
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Hình ảnh</th>
+                                <th>Tên xe</th>
+                                <th>Hãng xe</th>
+                                <th>Giá tiền</th>
+                                <th>Người liên hệ</th>
+                                <th>Số điện thoại</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody id="carList">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="jquery.js"></script>
+    <script>
+        $(document).ready(function () {
+            var cars = [];
+            $('#carForm').submit(function (event) {
+                event.preventDefault();
+                var carIndex = $('#carIndex').val();
+                var carName = $('#carName').val();
+                var carImage = $('#carImage').val();
+                var carBrand = $('#carBrand').val();
+                var carPrice = $('#carPrice').val();
+                var carDescription = $('#carDescription').val();
+                var contactPerson = $('#contactPerson').val();
+                var contactPhone = $('#contactPhone').val();
+                var contactEmail = $('#contactEmail').val();
+                var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(contactEmail)) {
+                    alert("Vui lòng nhập đúng định dạng email!");
+                    return;
+                }
+
+                var newCar = {
+                    carName: carName,
+                    carImage: carImage,
+                    carBrand: carBrand,
+                    carPrice: carPrice,
+                    carDescription: carDescription,
+                    contactPerson: contactPerson,
+                    contactPhone: contactPhone,
+                    contactEmail: contactEmail
+                };
+
+                if (carIndex === "") {
+                    cars.push(newCar);
+                } else {
+                    cars[carIndex] = newCar;
+                }
+                displayCarList();
+                $('#carForm')[0].reset();
+                $('#carIndex').val("");
+            });
+            $(document).on('click', '#carList tr', function () {
+                var carIndex = $(this).index();
+                var car = cars[carIndex];
+                $('#carIndex').val(carIndex);
+                $('#carName').val(car.carName);
+                $('#carImage').val(car.carImage);
+                $('#carBrand').val(car.carBrand);
+                $('#carPrice').val(car.carPrice);
+                $('#carDescription').val(car.carDescription);
+                $('#contactPerson').val(car.contactPerson);
+                $('#contactPhone').val(car.contactPhone);
+                $('#contactEmail').val(car.contactEmail);
+            });
+            function displayCarList() {
+                $('#carList').empty();
+                $.each(cars, function (index, car) {
+                    var listItem = $('<tr> \
+                                        <td>' + (index + 1) + '</td> \
+                                        <td><img src="' + car.carImage + '" alt="' + car.carName + '" style="max-width:100px;"></td> \
+                                        <td>' + car.carName + '</td> \
+                                        <td>' + car.carBrand + '</td> \
+                                        <td>' + car.carPrice + '</td> \
+                                        <td>' + car.contactPerson + '</td> \
+                                        <td>' + car.contactPhone + '</td> \
+                                        <td>' + car.contactEmail + '</td> \
+                                    </tr>');
+                    $('#carList').append(listItem);
+                });
+            }
+            $('#deleteCar').click(function () {
+                var carIndex = $('#carIndex').val();
+                if (carIndex === "") {
+                    alert("Vui lòng chọn xe cần xóa!");
+                    return;
+                }
+                cars.splice(carIndex, 1);
+                displayCarList();
+                $('#carForm')[0].reset();
+                $('#carIndex').val("");
+            });
+        });
+    </script>
+
+</body>
+
+</html>

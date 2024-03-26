@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        img {
+            width: 100%;
+            height: 100px;
+            border: 2px solid black;
+        }
+
+        .box {
+            background-color: aqua;
+            height: 800px;
+            width: 200px;
+            border: 2px solid gray;
+            padding: none;
+        }
+
+
+        .page {
+            display: none;
+        }
+
+        .show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="../image/download.jpg" alt="">
+    <div class="box">
+        <a href="tintuc.html" id="tintuc-link">Tin tức</a><br>
+        <a href="donggop.html" id="donggop-link">Đóng góp ý kiến</a>
+
+    </div>
+    
+    <div id="tintuc" class="page">
+        <h1>Tin tức</h1>
+    </div>
+    <div id="donggop" class="page">
+        <h1>Đóng góp ý kiến</h1>
+    </div>
+    <script>
+        const tintucLink = document.getElementById('tintuc-link');
+        const donggopLink = document.getElementById('donggop-link');
+        const tintuc = document.getElementById('tintuc');
+        const donggop = document.getElementById('donggop');
+
+        tintucLink.addEventListener('click', function () {
+            tintuc.classList.add('show');
+            donggop.classList.remove('show');
+        });
+
+        donggopLink.addEventListener('click', function () {
+            donggop.classList.add('show');
+            tintuc.classList.remove('show');
+        });
+
+    </script>
+</body>
+
+</html>

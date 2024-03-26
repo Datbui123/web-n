@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #box {
+            width: 400px;
+            height: 50px;
+            background-color: #fff;
+            border: 1px solid #000;
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box"></div>
+    <input type="radio" name="color" value="red"> Màu đỏ
+    <input type="radio" name="color" value="blue"> Màu xanh da trời
+    <input type="radio" name="color" value="green"> Màu xanh lá cây
+    <script type="text/javascript">
+        const box = document.getElementById('box');
+        const radios = document.querySelectorAll('input[type=radio][name=color]');
+
+        radios.forEach(radio => {
+            radio.addEventListener('click', function () {
+                switch (this.value) {
+                    case 'red':
+                        box.textContent = 'Bạn đã chọn red radio button';
+                        box.style.backgroundColor = 'red';
+                        break;
+                    case 'blue':
+                        box.textContent = 'Bạn đã chọn blue radio button';
+                        box.style.backgroundColor = 'blue';
+                        break;
+                    case 'green':
+                        box.textContent = 'Bạn đã chọn green radio button';
+                        box.style.backgroundColor = 'green';
+                        break;
+                    default:
+                        box.style.backgroundColor = 'white';
+                }
+            });
+        });
+
+    </script>
+</body>
+
+</html>

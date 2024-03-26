@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #myForm {
+            width: 350px;
+            height: 100%;
+            border: 1px solid;
+            position: relative;
+            left: 450px;
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        #username {
+            position: absolute;
+            top: 90px;
+            left: 140px;
+        }
+
+        #password {
+            position: absolute;
+            top: 125px;
+            left: 140px;
+        }
+
+        #repassword {
+            position: absolute;
+            top: 160px;
+            left: 140px;
+        }
+
+        #name {
+            position: absolute;
+            top: 225px;
+            left: 140px;
+        }
+
+        #gender {
+            position: absolute;
+            top: 260px;
+            left: 140px;
+        }
+
+        #addr {
+            position: relative;
+            left: 85px;
+        }
+
+        #birth {
+            position: relative;
+            left: 66px;
+        }
+
+        #email {
+            position: relative;
+            left: 93px;
+        }
+
+        .radio {
+            position: absolute;
+            top: 465px;
+            left: 135px;
+        }
+
+        .button {
+            text-align: center;
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="myForm">
+        <h3>ĐĂNG KÝ THÀNH VIÊN</h3>
+        <p>THÔNG TIN TÀI KHOẢN</p>
+        <p>Username: <input type="text" id="username"></p>
+        <p>Password: <input type="password" name="" id="password"></p>
+        <p>Nhập lại password: <input type="password" name="" id="repassword"></p>
+        <p>THÔNG TIN CÁ NHÂN</p>
+        <p>Họ và tên: <input type="text" id="name"></p>
+        <p>Giới tính:
+            <select name="" id="gender">
+                <option value="nam">Nam</option>
+                <option value="nu">Nữ</option>
+            </select>
+        </p>
+        <p>Địa chỉ:
+            <textarea name="" id="addr" cols="15" rows="5"></textarea>
+        </p>
+        <p>Ngày sinh: <input type="date" name="" id="birth"></p>
+        <p>Email: <input type="email" name="" id="email"></p>
+        <p>Tình trạng hôn nhân:
+        <div class="radio">
+            <input type="radio" name="option" id="">độc thân
+            <input type="radio" name="option" id="">đã đính hôn<br>
+            <input type="radio" name="option" id="">ly dị
+            <input type="radio" name="option" id="">quá phụ
+        </div>
+        </p>
+        <div class="button">
+            <input type="submit" value="Gửi đi">
+            <input type="reset" value="Nhập lại">
+        </div>
+    </form>
+    <script src="jquery.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#myForm').submit(function (event) {
+                if (!validateForm()) {
+                    event.preventDefault(); // Ngăn chặn form submit nếu không hợp lệ
+                    alert('Vui lòng nhập đầy đủ thông tin.');
+                }
+                if (!validateRadio()) {
+                    event.preventDefault(); // Ngăn chặn form submit nếu không hợp lệ
+                    alert('Vui lòng nhập đầy đủ thông tin.');
+                }
+            });
+
+            function validateForm() {
+                var username = $('#username').val();
+                var password = $('#password').val();
+                var repassword = $('#username').val();
+                var name = $('#name').val();
+                var gender = $('#gender').val();
+                var addr = $('#addr').val();
+                var birth = $('#birth').val();
+                var email = $('#email').val();
+                var selectedOption = $("input[name='option']:checked").val();
+
+                // Kiểm tra xem có trường nào trống không
+                if (username == '' || password === '' || repassword == '' || name === '' || gender == '' || addr === '' || birth == '' || email === '' || !selectedOption) {
+                    return false;
+                }
+
+                // Kiểm tra định dạng email
+                //var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                //if (!emailRegex.test(email)) {
+                //  return false;
+                //}
+
+                return true;
+            }
+        });
+
+    </script>
+</body>
+
+</html>

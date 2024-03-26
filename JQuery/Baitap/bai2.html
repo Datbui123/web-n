@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #box {
+            width: 300px;
+            height: 100px;
+            border: 1px solid black;
+            margin: 10px 0;
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    
+
+    <form id="myForm">
+        <input type="radio" id="red" name="red radio button" value="red">
+        <label for="red">Màu đỏ</label>
+        <input type="radio" id="blue" name="blue radio button" value="blue">
+        <label for="blue">Xanh da trời</label>
+        <input type="radio" id="green" name="green radio button" value="green">
+        <label for="green">Xanh lá cây</label><br>
+
+        <div id="box"></div>
+    </form>
+
+    <script src="jquery.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('input[type="radio"]').change(function () {
+                $('input[type="radio"]').not(this).prop('checked', false); // Uncheck các radio button khác
+                var color = $(this).val(); // Lấy giá trị màu từ radio button được chọn
+                $('#box').css('background-color', color); // Đổi màu của ô vuông
+                var text = $(this).attr("name");
+                var color1 = 'white';
+                $('#box').text("Bạn đã chọn "+ text).css('color','white');
+            });
+        });    
+        
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        label{
+            color: rgb(119, 4, 4);
+        }
+    </style>
+</head>
+
+<body>
+    <form id="form">
+        <label for="name">Account name</label><br>
+        <input type="text" id="name" name="name" placeholder="Account name"><br>
+        <input type="submit" value="Save">
+    </form>
+
+    <script src="../Sorce/jquery.js"></script>
+    <script src="../Sorce/jquery-validation-1.19.5/jquery-validation-1.19.5/dist/jquery.validate.js"></script>
+    <script src="../Sorce/jquery-ui-1.13.2.custom/jquery-ui-1.13.2.custom/jquery-ui.js"></script>
+    <script src="../Sorce/jquery-ui-1.13.2.custom/jquery-ui-1.13.2.custom/jquery-ui.css"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var object = {
+                errorPlacement: function (error, element) {
+                    error.insertAfter(element);
+                    error.wrap("<div class='eror-wrapper'></div>");
+                },
+                rules: {
+                    name: {
+                        required: true,
+                    },
+                },
+                messages: {
+                    name: {
+                        required: "Vui lòng nhập tên"
+                    },
+                }
+            }
+            $('#form').validate(object);
+        });
+    </script>
+</body>
+
+</html>

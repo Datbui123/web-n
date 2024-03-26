@@ -1,0 +1,53 @@
+.box{
+    position: relative
+}
+.box2{
+    text-align: center;
+    width: 450px;
+    position: absolute;
+    top: -10px;
+    right: 50px;
+}
+.box3{
+    position: relative;
+}
+.box4{
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.box5{
+    position: relative;
+    top: 290px;
+}
+.box6{
+    position: absolute;
+}
+.box7{
+    position: absolute;
+    right: 10px;
+}
+ul.nav>li{
+    list-style: none;
+    float: left;
+}
+
+.nav1{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: blue;
+    height: 20px;
+    text-align: center;
+    width: 1200px;
+}
+ul.nav1>li>a{
+    display: block;
+    line-height: 20px;
+    font-variant: small-caps;
+    padding-left: 30px;
+    color: white;
+    text-decoration: none;
+}
+ul.nav1>li{
+    list-style: none;
+    float: left;
+}
